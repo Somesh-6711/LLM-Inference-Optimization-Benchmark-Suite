@@ -1,0 +1,9 @@
+name: pytorch_fp16
+description: Baseline. Hugging Face transformers, fp16 weights, SDPA attention, eager execution.
+model:
+  repo_id: Qwen/Qwen2.5-1.5B-Instruct
+  revision: 989aa7980e4cf806f80c7fef2b1adb7bc71aa306
+  dtype: float16
+engine:
+  kind: transformers
+  attn_implementation: sdpa

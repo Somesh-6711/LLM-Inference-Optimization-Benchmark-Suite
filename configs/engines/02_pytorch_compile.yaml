@@ -1,0 +1,11 @@
+name: pytorch_compile
+description: Baseline plus torch.compile. Compile time is reported separately from steady-state latency.
+model:
+  repo_id: Qwen/Qwen2.5-1.5B-Instruct
+  revision: 989aa7980e4cf806f80c7fef2b1adb7bc71aa306
+  dtype: float16
+engine:
+  kind: transformers
+  attn_implementation: sdpa
+  torch_compile: true
+  compile_mode: default

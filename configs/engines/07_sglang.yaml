@@ -1,0 +1,11 @@
+name: sglang
+description: SGLang with RadixAttention. Radix cache is set per workload by the runner.
+model:
+  repo_id: Qwen/Qwen2.5-1.5B-Instruct
+  revision: 989aa7980e4cf806f80c7fef2b1adb7bc71aa306
+  dtype: float16
+engine:
+  kind: sglang
+  mem_fraction_static: 0.80
+  context_length: 2048
+  max_running_requests: 64

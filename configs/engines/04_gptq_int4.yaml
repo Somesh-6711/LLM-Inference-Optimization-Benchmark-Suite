@@ -1,0 +1,11 @@
+name: gptq_int4
+description: GPTQ 4-bit weights quantized by this project, run under transformers to isolate the effect of quantization.
+model:
+  # Created on Day 9. Replace the namespace if your Hugging Face username differs from GitHub.
+  repo_id: Somesh-6711/Qwen2.5-1.5B-Instruct-GPTQ-Int4
+  revision: main  # pinned on Day 9 after upload
+  dtype: float16
+  quantization: gptq
+engine:
+  kind: transformers
+  attn_implementation: sdpa

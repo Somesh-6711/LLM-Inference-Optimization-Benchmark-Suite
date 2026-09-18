@@ -1,0 +1,56 @@
+# Benchmark suite definition. Engines live in configs/engines/.
+# trials / count_per_workload / num_requests are provisional: final values are set
+# on Day 6 from measured seconds-per-generation against the Kaggle GPU budget.
+
+model_repo: Qwen/Qwen2.5-1.5B-Instruct
+tokenizer_revision: 989aa7980e4cf806f80c7fef2b1adb7bc71aa306
+expected_gpu: Tesla T4
+
+run:
+  warmup_requests: 3
+  trials: 5
+  temperature: 0.0
+  ignore_eos: true
+
+prompt_set:
+  version: v1
+  directory: ../data/prompts/v1
+  seed: 1234
+  count_per_workload: 32
+  source_dataset: Salesforce/wikitext
+  source_config: wikitext-2-raw-v1
+  source_split: train  # test split is reserved for perplexity
+  system_prompt: "You are a helpful assistant."
+  user_instruction: "Summarize the following passage in plain English.\n\n"
+  prefix_system_instruction: "You are a support assistant. Answer questions using only the reference document below.\n\nReference document:\n"
+  prefix_user_instruction: "Using the reference document, explain the following excerpt.\n\n"
+
+workloads:
+  plain_128:
+    input_len: 128
+  plain_512:
+    input_len: 512
+  plain_1024:
+    input_len: 1024
+  prefix_1024:
+    input_len: 1024
+    shared_prefix_len: 896  # 56 x 16: fully aligned to vLLM's 16-token KV blocks
+
+scenarios:
+  single_stream:  # scenario A: batch size 1, all seven configs
+    engines: all
+    workloads: [plain_128, plain_512, plain_1024]
+    output_lens: [128, 256]
+    concurrency: [1]
+  concurrency_sweep:  # scenario B: serving engines under load
+    engines: servers
+    workloads: [plain_512]
+    output_lens: [128]
+    concurrency: [1, 4, 16, 64]
+    num_requests: 128
+  prefix_heavy:  # shared system prompt; prefix caching on for both engines
+    engines: servers
+    workloads: [prefix_1024]
+    output_lens: [128]
+    concurrency: [1, 16]
+    num_requests: 64

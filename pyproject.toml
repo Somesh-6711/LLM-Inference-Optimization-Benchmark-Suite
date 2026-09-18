@@ -6,7 +6,10 @@ readme = "README.md"
 requires-python = ">=3.11,<3.12"
 license = { text = "MIT" }
 authors = [{ name = "Somesh" }]
-dependencies = []
+dependencies = [
+    "pydantic>=2.8",
+    "pyyaml>=6.0",
+]
 
 [project.scripts]
 infer-bench = "infer_bench.cli:main"
@@ -18,6 +21,13 @@ dev = [
     "ruff>=0.6",
     "mypy>=1.11",
     "pre-commit>=3.8",
+    "types-pyyaml>=6.0",
+]
+prompts = [
+    "datasets>=3.0",
+    "huggingface-hub>=0.25",
+    "jinja2>=3.1",
+    "transformers>=4.45",
 ]
 
 [build-system]
@@ -57,3 +67,4 @@ markers = [
 python_version = "3.11"
 strict = true
 files = ["src"]
+plugins = ["pydantic.mypy"]

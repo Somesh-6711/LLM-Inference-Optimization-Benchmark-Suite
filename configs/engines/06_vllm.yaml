@@ -1,0 +1,12 @@
+name: vllm
+description: vLLM with PagedAttention and continuous batching. Prefix caching is set per workload by the runner.
+model:
+  repo_id: Qwen/Qwen2.5-1.5B-Instruct
+  revision: 989aa7980e4cf806f80c7fef2b1adb7bc71aa306
+  dtype: float16
+engine:
+  kind: vllm
+  gpu_memory_utilization: 0.85
+  max_model_len: 2048
+  max_num_seqs: 64
+  enforce_eager: false

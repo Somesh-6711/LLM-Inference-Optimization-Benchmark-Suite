@@ -1,0 +1,11 @@
+name: awq_int4
+description: AWQ 4-bit weights quantized by this project, run under transformers to isolate the effect of quantization.
+model:
+  # Created on Day 10. Replace the namespace if your Hugging Face username differs from GitHub.
+  repo_id: Somesh-6711/Qwen2.5-1.5B-Instruct-AWQ-Int4
+  revision: main  # pinned on Day 10 after upload
+  dtype: float16
+  quantization: awq
+engine:
+  kind: transformers
+  attn_implementation: sdpa
