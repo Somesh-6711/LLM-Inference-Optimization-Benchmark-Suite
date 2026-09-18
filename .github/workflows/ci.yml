@@ -37,5 +37,8 @@ jobs:
       - name: Test
         run: uv run pytest --cov=infer_bench --cov-report=term-missing
 
+      - name: Validate configs and committed prompt set
+        run: uv run infer-bench validate
+
       - name: Build wheel and sdist
         run: uv build

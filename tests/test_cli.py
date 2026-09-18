@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import platform
+from pathlib import Path
 
 import pytest
 
@@ -37,3 +38,24 @@ def test_collect_env_has_required_keys() -> None:
 def test_no_command_prints_help(capsys: pytest.CaptureFixture[str]) -> None:
     assert main([]) == 0
     assert "usage:" in capsys.readouterr().out
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_validate_command_passes_on_repo_configs(capsys: pytest.CaptureFixture[str]) -> None:
+    code = main(
+        [
+            "validate",
+            "--engines",
+            str(REPO_ROOT / "configs" / "engines"),
+            "--suite",
+            str(REPO_ROOT / "configs" / "suite.yaml"),
+        ]
+    )
+    assert code == 0
+    assert "OK" in capsys.readouterr().out
+
+
+def test_validate_command_fails_on_missing_configs(tmp_path: Path) -> None:
+    assert main(["validate", "--engines", str(tmp_path), "--suite", "nope.yaml"]) == 1
