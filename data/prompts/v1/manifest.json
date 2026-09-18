@@ -1,0 +1,42 @@
+{
+  "version": "v1",
+  "seed": 1234,
+  "tokenizer_repo": "Qwen/Qwen2.5-1.5B-Instruct",
+  "tokenizer_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "source": "Salesforce/wikitext/wikitext-2-raw-v1:train",
+  "generator_versions": {
+    "datasets": "5.0.1",
+    "tokenizers": "0.23.2",
+    "transformers": "5.17.0"
+  },
+  "workloads": {
+    "plain_1024": {
+      "file": "plain_1024.jsonl",
+      "sha256": "c1d2909c34ca66e42bdeb1a66ffde47f513d528251e97f2e266564a0e7fd0829",
+      "count": 32,
+      "input_len": 1024,
+      "shared_prefix_len": 0
+    },
+    "plain_128": {
+      "file": "plain_128.jsonl",
+      "sha256": "712e0d1a0f9ee4b5073873b8351631d24e1f2e4d945868f92c4f291f7ff1b2a2",
+      "count": 32,
+      "input_len": 128,
+      "shared_prefix_len": 0
+    },
+    "plain_512": {
+      "file": "plain_512.jsonl",
+      "sha256": "056dcdf7b4ec6fc8c9ab6a6c69eba61eed9feeba1592c323ab59191f855ff6dc",
+      "count": 32,
+      "input_len": 512,
+      "shared_prefix_len": 0
+    },
+    "prefix_1024": {
+      "file": "prefix_1024.jsonl",
+      "sha256": "7a4eb75a90e8688e5330370a1bea7d788faad062961e52e2a8feb91954d9e74e",
+      "count": 32,
+      "input_len": 1024,
+      "shared_prefix_len": 896
+    }
+  }
+}
